@@ -9,11 +9,12 @@ const props = defineProps({
   author: { type: String, required: true }
 })
 let nameAuthor = ref<string>("");
+let idAuthorCurrentPost = ref<string>("");
 
 onMounted(() => {
   searchUserById()
+  idAuthorCurrentPost.value = (JSON.parse(localStorage.getItem('user') || ''))._id;
 });
-
 
 const onViewPost = () => {
   router.push(`/home/edit/${props.id}`)
@@ -34,7 +35,7 @@ const searchUserById = async () => {
       <h5 class="card-title">{{ title }}</h5>
       <p class="card-text">{{ content }}</p>
       <strong class="my-2"> Autor -  {{ nameAuthor }} </strong>
-      <a @click="onViewPost()" class="btn btn-primary">Editar</a>
+      <a v-if="props.author === idAuthorCurrentPost" @click="onViewPost()" class="btn btn-primary">Editar</a>
     </div>
   </div>
 </template>
