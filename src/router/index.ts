@@ -26,12 +26,12 @@ const router = createRouter({
         {
           path: 'create',
           name: 'create',
-          component: () => import('../components/Posts.vue')
+          component: () => import('../components/CreatePost.vue')
         },
         {
           path: 'edit/:id',
           name: 'edit',
-          component: () => import('../components/EditPost.vue')
+          component: () => import('../components/EditDeletePost.vue')
         },
       ]
     },

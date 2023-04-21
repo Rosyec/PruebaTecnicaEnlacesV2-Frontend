@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import router from '@/router'
+import Swal from 'sweetalert2'
 import { getPostById, updatePost, deletePost } from '../services/service.backend'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -24,17 +25,35 @@ const searchPost = async () => {
 }
 
 const onEditPost = async () => {
-  const response = await updatePost(id.value, { content: content.value, title: title.value }); 
+  const response = await updatePost(id.value, { content: content.value, title: title.value })
   if (response) {
-      router.push('/home/posts');
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Post editado!',
+      showConfirmButton: true
+    }).then((m) => {
+      if (m.isConfirmed) {
+        router.push('/home/posts')
+      }
+    })
   }
 }
 
 const onDeletePost = async () => {
-    const response = await deletePost(id.value);
-    if (response) {
-        router.push('/home/posts');
-    }
+  const response = await deletePost(id.value)
+  if (response) {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Post eliminado!',
+      showConfirmButton: true
+    }).then((m) => {
+      if (m.isConfirmed) {
+        router.push('/home/posts')
+      }
+    })
+  }
 }
 </script>
 

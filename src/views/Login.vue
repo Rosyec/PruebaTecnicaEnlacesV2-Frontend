@@ -1,20 +1,31 @@
 <script setup lang="ts">
-import router from '@/router';
+import router from '@/router'
+import Swal from 'sweetalert2'
 import { login, getToken } from '../services/service.backend'
 
-    let email: string = "chechomens@gmail.com";
-    let password: string = "123456";
+let email: string = 'chechomens@gmail.com'
+let password: string = '123456'
 
-    const toLogin = async () => {
-        if (email.length === 0 && password.length === 0) {
-            return;
-        }
-        const myToken = await getToken(email);
-        const response = await login(email, password, myToken.token);
-        if (response) {
-            router.push('/home/posts');
-        }
-    }
+const toLogin = async () => {
+  if (email.length === 0 && password.length === 0) {
+    return
+  }
+  const myToken = await getToken(email)
+  const response = await login(email, password, myToken.token)
+  if (response) {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Inicio de sesión exitoso',
+      showConfirmButton: true
+    }).then((m) => {
+      if (m.isConfirmed) {
+        localStorage.setItem('user', JSON.stringify(response))
+        router.push('/home/posts')
+      }
+    })
+  }
+}
 </script>
 
 <template>
@@ -30,35 +41,34 @@ import { login, getToken } from '../services/service.backend'
           <div class="row title">
             <span class="display-5"> Bienvenido </span>
           </div>
-            <div className="input my-2 mt-5">
-              <input
-                type="email"
-                placeholder="Email"
-                name="username"
-                v-model="email"
-                autoComplete="new-password"
-                required
-              />
+          <div className="input my-2 mt-5">
+            <input
+              type="email"
+              placeholder="Email"
+              name="username"
+              v-model="email"
+              autoComplete="new-password"
+              required
+            />
+          </div>
+          <div className="input my-2">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              v-model="password"
+              autoComplete="new-password"
+              required
+            />
+          </div>
+          <div className="row">
+            <div className="btn-confirm mt-3">
+              <button @click="toLogin()" id="myBtnConfirm">Entrar</button>
             </div>
-            <div className="input my-2">
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                v-model="password"
-                autoComplete="new-password"
-                required
-              />
-            </div>
-            <div className="row">
-              <div className="btn-confirm mt-3">
-                <button @click="toLogin()" id="myBtnConfirm">Entrar</button>
-              </div>
-              <RouterLink to="/register">
-                  <a className="mt-3 nav-link"> ¿Nuevo en la plataforma? Registrate aquí! </a>
-              </RouterLink>
-            </div>
-          
+            <RouterLink to="/register">
+              <a className="mt-3 nav-link"> ¿Nuevo en la plataforma? Registrate aquí! </a>
+            </RouterLink>
+          </div>
         </div>
       </div>
     </div>
@@ -66,10 +76,9 @@ import { login, getToken } from '../services/service.backend'
 </template>
 
 <style scoped>
-
 input:hover {
-    background-color: rgb(236, 231, 231);
-  }
+  background-color: rgb(236, 231, 231);
+}
 
 body,
 .login {

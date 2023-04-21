@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import router from '@/router'
 import { register } from '../services/service.backend'
+import Swal from 'sweetalert2'
 
 let name: string = ''
 let email: string = ''
@@ -12,7 +13,16 @@ const toRegister = async () => {
   }
   const response = await register(name, email, password)
   if (response) {
-    router.push('/')
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Registrado correctamente',
+      showConfirmButton: true,
+    }).then((m) => {
+      if (m.isConfirmed) {
+        router.push('/')
+      }
+    })
   }
 }
 </script>

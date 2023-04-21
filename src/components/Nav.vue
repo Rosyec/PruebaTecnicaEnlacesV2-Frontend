@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import router from '@/router';
+
 
 const listItems: Links[] = [
     {
@@ -7,17 +9,14 @@ const listItems: Links[] = [
     },
     {
         name: 'Crear post',
-        url: ''
+        url: '/home/create'
     },
-    // {
-    //     name: 'Editar post',
-    //     url: ''
-    // },
-    // {
-    //     name: 'Eliminar post',
-    //     url: ''
-    // },
 ]
+
+const onLogout = () => {
+    localStorage.removeItem('user');
+    router.push('/')
+}
 
 interface Links {
     url: string,
@@ -44,7 +43,7 @@ interface Links {
                     </ul>
                         <span class="spacer"></span>
                         <span class='mx-2'>|</span>
-                        <a class='btn btn-outline-dark'>Logout</a>
+                        <a @click="onLogout()" class='btn btn-outline-dark'>Logout</a>
                 </div>
             </div>
         </nav>
@@ -54,5 +53,9 @@ interface Links {
 <style scoped>
 .spacer{
     flex: 1 1 auto;
+}
+
+a {
+    text-decoration: none;
 }
 </style>

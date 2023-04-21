@@ -20,7 +20,7 @@ export interface Post {
   author:  string;
 }
 
-export interface UpdatePost {
+export interface CustomPost {
   title: string,
   content: string
 }
