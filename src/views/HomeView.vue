@@ -1,9 +1,21 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import Footer from '../components/Footer.vue'
+import Nav from '../components/Nav.vue'
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <Nav/>
+  <div class="container text-center">
+    <h1>Home Page</h1>
+  </div>
+  <Footer/>
 </template>
+
+<style scoped>
+  .container {
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
