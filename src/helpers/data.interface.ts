@@ -12,3 +12,15 @@ export interface Register {
   token:   string;
   message: string;
 }
+
+export interface Post {
+  _id:     string;
+  title:   string;
+  content: string;
+  author:  string;
+}
+
+export interface UpdatePost {
+  title: string,
+  content: string
+}

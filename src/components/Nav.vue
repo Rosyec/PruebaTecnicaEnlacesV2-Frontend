@@ -3,20 +3,20 @@
 const listItems: Links[] = [
     {
         name: 'Posts',
-        url: '/'
+        url: '/home/posts'
     },
     {
         name: 'Crear post',
         url: ''
     },
-    {
-        name: 'Editar post',
-        url: ''
-    },
-    {
-        name: 'Eliminar post',
-        url: ''
-    },
+    // {
+    //     name: 'Editar post',
+    //     url: ''
+    // },
+    // {
+    //     name: 'Eliminar post',
+    //     url: ''
+    // },
 ]
 
 interface Links {

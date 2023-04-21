@@ -16,7 +16,24 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: () => import('../views/HomeView.vue')
+      component: () => import('../views/HomeView.vue'),
+      children: [
+        {
+          path: 'posts',
+          name: 'posts',
+          component: () => import('../components/Posts.vue')
+        },
+        {
+          path: 'create',
+          name: 'create',
+          component: () => import('../components/Posts.vue')
+        },
+        {
+          path: 'edit/:id',
+          name: 'edit',
+          component: () => import('../components/EditPost.vue')
+        },
+      ]
     },
   ]
 })

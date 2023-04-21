@@ -12,7 +12,7 @@ import { login, getToken } from '../services/service.backend'
         const myToken = await getToken(email);
         const response = await login(email, password, myToken.token);
         if (response) {
-            router.push('/home');
+            router.push('/home/posts');
         }
     }
 </script>

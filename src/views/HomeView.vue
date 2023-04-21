@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterView } from 'vue-router'
 import Footer from '../components/Footer.vue'
 import Nav from '../components/Nav.vue'
 </script>
@@ -6,7 +7,7 @@ import Nav from '../components/Nav.vue'
 <template>
   <Nav/>
   <div class="container text-center">
-    <h1>Home Page</h1>
+    <RouterView />
   </div>
   <Footer/>
 </template>
@@ -17,5 +18,6 @@ import Nav from '../components/Nav.vue'
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
 </style>
